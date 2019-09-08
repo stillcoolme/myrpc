@@ -1,7 +1,7 @@
-package com.stillcoolme.provider.registry;
+package com.stillcoolme.service.registry;
 
 import com.alibaba.fastjson.JSONArray;
-import com.stillcoolme.provider.common.InvokeUtils;
+import com.stillcoolme.service.common.InvokeUtils;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -98,5 +98,34 @@ public class ZookeeperRegistry implements Registry {
             }
         }
 
+    }
+
+    /**
+     * 去zookeeper获取节点中的数据，得到接口所在的机器信息，获取到的注册信息
+     * @param clazz
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List fetchRegistry(Class clazz) throws Exception {
+        Method[] declaredMethods = clazz.getDeclaredMethods();
+        List<RegistryInfo> registryInfos = null;
+        for (Method method : declaredMethods) {
+            String key = InvokeUtils.buildInterfaceMethodIdentify(clazz, method);
+            String path = "/myRPC/" + key;
+            Stat stat = client.checkExists()
+                    .forPath(path);
+            if(stat == null) {
+                // 这里可以添加watcher来监听变化，这里简化了，没有做这个事情
+                System.out.println("警告：无法找到服务接口：" + path);
+                continue;
+            }
+            if(registryInfos == null) {
+                byte[] bytes = client.getData().forPath(path);
+                String data = new String(bytes, StandardCharsets.UTF_8);
+                registryInfos = JSONArray.parseArray(data, RegistryInfo.class);
+            }
+        }
+        return registryInfos;
     }
 }

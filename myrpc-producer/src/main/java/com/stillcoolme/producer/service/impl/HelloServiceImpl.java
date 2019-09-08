@@ -1,7 +1,7 @@
-package com.stillcoolme.service.service.impl;
+package com.stillcoolme.producer.service.impl;
 
-import com.stillcoolme.service.service.HelloService;
-import com.stillcoolme.service.model.TestBean;
+import com.stillcoolme.producer.service.HelloService;
+import com.stillcoolme.producer.model.TestBean;
 
 public class HelloServiceImpl implements HelloService {
 

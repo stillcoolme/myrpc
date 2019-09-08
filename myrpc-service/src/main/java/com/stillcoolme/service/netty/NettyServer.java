@@ -1,6 +1,6 @@
-package com.stillcoolme.provider.netty;
+package com.stillcoolme.service.netty;
 
-import com.stillcoolme.provider.ServiceConfig;
+import com.stillcoolme.service.ServiceConfig;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -46,7 +46,7 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ByteBuf delimiter = Unpooled.copiedBuffer("$$");
+                        ByteBuf delimiter = Unpooled.copiedBuffer("$$".getBytes());
                         // 设置按照分隔符“&&”来切分消息，单条消息限制为 1MB
                         ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024 * 1024, delimiter));
                         ch.pipeline().addLast(new StringDecoder());

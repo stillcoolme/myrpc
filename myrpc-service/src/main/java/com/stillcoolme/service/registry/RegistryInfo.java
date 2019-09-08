@@ -1,4 +1,4 @@
-package com.stillcoolme.provider.registry;
+package com.stillcoolme.service.registry;
 
 /**
  * @author: stillcoolme

@@ -1,9 +1,9 @@
-package com.stillcoolme.provider.netty;
+package com.stillcoolme.service.netty;
 
 import com.alibaba.fastjson.JSONObject;
-import com.stillcoolme.provider.ServiceConfig;
-import com.stillcoolme.provider.model.RpcRequest;
-import com.stillcoolme.provider.model.RpcResponse;
+import com.stillcoolme.service.ServiceConfig;
+import com.stillcoolme.service.model.RpcRequest;
+import com.stillcoolme.service.model.RpcResponse;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;

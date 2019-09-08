@@ -29,10 +29,10 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.stillcoolme</groupId>
-      <artifactId>myrpc-provider</artifactId>
-      <version>1.0.0</version>
-      <scope>compile</scope>
+        <groupId>com.stillcoolme</groupId>
+        <artifactId>myrpc-service</artifactId>
+        <version>1.0.0</version>
+        <scope>compile</scope>
     </dependency>
   </dependencies>
 
