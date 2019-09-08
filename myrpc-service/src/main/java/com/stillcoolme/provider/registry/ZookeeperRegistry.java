@@ -1,7 +1,7 @@
-package com.stillcoolme.registry;
+package com.stillcoolme.provider.registry;
 
 import com.alibaba.fastjson.JSONArray;
-import com.stillcoolme.common.InvokeUtils;
+import com.stillcoolme.provider.common.InvokeUtils;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;

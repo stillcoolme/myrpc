@@ -1,6 +1,7 @@
-package com.stillcoolme.service;
+package com.stillcoolme.service.service;
 
-import com.stillcoolme.model.TestBean;
+
+import com.stillcoolme.service.model.TestBean;
 
 /**
  * @author: stillcoolme

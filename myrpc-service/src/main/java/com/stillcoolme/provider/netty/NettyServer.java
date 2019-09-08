@@ -1,6 +1,6 @@
-package com.stillcoolme.service;
+package com.stillcoolme.provider.netty;
 
-import com.stillcoolme.ServiceConfig;
+import com.stillcoolme.provider.ServiceConfig;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

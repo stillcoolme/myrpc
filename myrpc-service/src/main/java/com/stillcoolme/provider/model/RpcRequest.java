@@ -1,4 +1,4 @@
-package com.stillcoolme.model;
+package com.stillcoolme.provider.model;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;

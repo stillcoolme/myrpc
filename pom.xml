@@ -11,6 +11,7 @@
   <modules>
     <module>myrpc-service</module>
     <module>myrpc-consumer</module>
+    <module>myrpc-producer</module>
   </modules>
 
   <name>my-rpc</name>

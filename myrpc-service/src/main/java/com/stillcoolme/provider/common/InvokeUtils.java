@@ -1,4 +1,4 @@
-package com.stillcoolme.common;
+package com.stillcoolme.provider.common;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

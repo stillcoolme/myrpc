@@ -1,9 +1,9 @@
-package com.stillcoolme.service;
+package com.stillcoolme.provider.netty;
 
 import com.alibaba.fastjson.JSONObject;
-import com.stillcoolme.ServiceConfig;
-import com.stillcoolme.model.RpcRequest;
-import com.stillcoolme.model.RpcResponse;
+import com.stillcoolme.provider.ServiceConfig;
+import com.stillcoolme.provider.model.RpcRequest;
+import com.stillcoolme.provider.model.RpcResponse;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date: 2019/8/22 9:20
  * @description:
  **/
-public class RpcInvokeHandler  extends ChannelInboundHandlerAdapter {
+public class RpcInvokeHandler extends ChannelInboundHandlerAdapter {
     /**
      * 接口方法唯一标识对应的Method对象
      */
@@ -39,6 +39,13 @@ public class RpcInvokeHandler  extends ChannelInboundHandlerAdapter {
         }
     }
 
+    /**
+     * 接受消息，将消息解析成RpcRequest
+     *
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         String message = (String) msg;
@@ -51,15 +58,16 @@ public class RpcInvokeHandler  extends ChannelInboundHandlerAdapter {
 
     }
 
-    ThreadPoolExecutor threadPoolExecutor  = new ThreadPoolExecutor(10,
+    ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10,
             32, 60000, TimeUnit.SECONDS, new LinkedBlockingDeque<>(100),
             new ThreadFactory() {
                 AtomicInteger atomicInteger = new AtomicInteger(0);
+
                 @Override
                 public Thread newThread(Runnable r) {
                     return new Thread(r, "IO-thread-" + atomicInteger.incrementAndGet());
                 }
-    });
+            });
 
     private class RpcInvokeTask implements Runnable {
         private RpcRequest rpcRequest;
@@ -96,7 +104,7 @@ public class RpcInvokeHandler  extends ChannelInboundHandlerAdapter {
                 Object requestObject = interfaceToInstance.get(interfaceClass);
                 String parameter = map.get("parameter");
                 Object result;
-                if(parameter != null) {
+                if (parameter != null) {
                     String[] parameterTypeClass = parameter.split(",");
                     Map<String, Object> parameterMap = rpcRequest.getParameterMap();
                     Object[] parameterInstance = new Object[parameterTypeClass.length];

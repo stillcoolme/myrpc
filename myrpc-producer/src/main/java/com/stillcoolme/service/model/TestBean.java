@@ -1,4 +1,4 @@
-package com.stillcoolme.model;
+package com.stillcoolme.service.model;
 
 /**
  * @author: stillcoolme
